@@ -1,0 +1,21 @@
+# Cooper developer portfolio
+
+This site is the portfolio of Cooper, a software developer.
+
+## Primary profile
+- GitHub: https://github.com/Cooper-Src
+- Projects: https://cooper-src.github.io/projects.html
+
+## Current repositories
+- src: https://github.com/Cooper-Src/src
+- src-registry: https://github.com/Cooper-Src/src-registry
+- src-init: https://github.com/Cooper-Src/src-init
+- fsf: https://github.com/Cooper-Src/fsf
+- RustRadio: https://github.com/Cooper-Src/RustRadio
+- TinyTalk: https://cooper-src.github.io/projects/tinytalk.html
+
+## Project pages
+- RustRadio: https://cooper-src.github.io/projects/rustradio.html
+
+## Notes
+Repository pages are the authoritative source for implementation details and current project status.
