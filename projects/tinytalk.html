@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TinyTalk | Cooper</title>
+<meta name="description" content="A Python project that implements, trains and runs a small decoder-only transformer language model from scratch.">
+<link rel="canonical" href="https://example.com/projects/tinytalk.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "TinyTalk | Cooper", "url": "https://example.com/projects/tinytalk.html", "description": "A Python project that implements, trains and runs a small decoder-only transformer language model from scratch."}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="container header-inner">
+<a class="brand" href="../index.html">COOPER</a>
+<nav class="site-nav" aria-label="Primary navigation">
+<a href="../projects.html" aria-current="page">Projects</a>
+<a href="../about.html">About</a>
+<a href="../resume.html">Resume</a>
+<a href="../contact.html">Contact</a>
+</nav></div></header>
+<main id="main">
+<section class="page"><div class="container">
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+<a href="../index.html">Home</a><span>/</span><a href="../projects.html">Projects</a><span>/</span><span aria-current="page">TinyTalk</span>
+</nav>
+<header class="page-header">
+<p class="eyebrow">Python · PyTorch · Machine Learning</p>
+<h1>TinyTalk</h1>
+<p>A Python project that implements, trains and runs a small decoder-only transformer language model from scratch.</p>
+<div class="actions"><a class="button button-secondary" href="../projects.html">All projects</a></div>
+</header>
+<article class="prose"><p>TinyTalk is a Python language-model project built around a custom decoder-only Transformer implementation.</p>
+<h2>Model architecture</h2>
+<p>The current model configuration defines:</p>
+<ul>
+<li>2,000-token vocabulary</li>
+<li>256-token context length</li>
+<li>512-dimensional token embeddings</li>
+<li>8 Transformer layers</li>
+<li>8 attention heads per layer</li>
+<li>1,536-dimensional feed-forward layers</li>
+<li>Rotary positional embeddings (RoPE)</li>
+<li>RMSNorm</li>
+<li>Weight tying between token embeddings and the language-model head</li>
+</ul>
+<p>The attention implementation applies a causal upper-triangular mask, so each token can only attend to the current position and earlier positions.</p>
+<h2>Training</h2>
+<p>Training is implemented with PyTorch. The trainer:</p>
+<ul>
+<li>Uses CUDA automatically when PyTorch reports a CUDA device, otherwise CPU</li>
+<li>Builds the dataset from <code>data/train.txt</code></li>
+<li>Trains with cross-entropy next-token prediction</li>
+<li>Uses gradient clipping with a maximum norm of <code>1.0</code></li>
+<li>Uses AdamW-style optimizer and scheduler helpers from the project</li>
+<li>Saves checkpoints during training and can resume from the latest checkpoint</li>
+</ul>
+<p>The repository currently contains a <code>checkpoints/latest.pt</code> checkpoint and tokenizer files generated for TinyTalk.</p>
+<h2>Tokenizer</h2>
+<p>TinyTalk uses SentencePiece with a BPE tokenizer. The current tokenizer configuration uses a vocabulary size of 2,000 tokens and reserves IDs for padding, unknown tokens, beginning-of-sequence and end-of-sequence markers.</p>
+<h2>Generation</h2>
+<p><code>tinytalk/generate.py</code> implements autoregressive generation. It supports:</p>
+<ul>
+<li>Maximum new-token limits</li>
+<li>Temperature sampling</li>
+<li>Top-k sampling</li>
+<li>Context-window truncation to the configured 256-token limit</li>
+<li>Early stopping on the tokenizer&#x27;s end-of-sequence token</li>
+</ul>
+<h2>Interactive chat</h2>
+<p>The repository includes <code>chat.py</code>, which loads the model and tokenizer, restores a checkpoint, and provides a terminal chat loop. Prompts are passed into the generation function and the generated response is printed back to the terminal.</p>
+<h2>Dataset pipeline</h2>
+<p>The dataset pipeline is split into separate stages. <code>build_dataset.py</code> combines processed text files from <code>data/processed</code> into <code>data/train.txt</code>, while <code>train_tokenizer.py</code> trains and verifies the SentencePiece tokenizer against that corpus.</p>
+<h2>Project structure</h2>
+<pre><code class="language-text">config/                Model, tokenizer and training configuration
+tinytalk/              Model, data, generation and training code
+tinytalk/layers/       Transformer building blocks
+tinytalk/training/     Checkpoint, optimizer, scheduler and loss helpers
+tokenizer/             SentencePiece tokenizer files and wrapper
+tests/                 Dataset, forward-pass and training-step tests
+chat.py                Interactive terminal chat
+train.py               Training entry point
+build_dataset.py       Training-corpus builder
+train_tokenizer.py     Tokenizer training script</code></pre>
+<h2>Source</h2>
+<p>The portfolio page describes the uploaded project source. A public repository link can be added here when the TinyTalk repository URL is available.</p></article>
+</div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><p>© 2026 Cooper.</p>
+<nav class="footer-nav" aria-label="Footer navigation">
+<a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../cookies.html">Cookies</a><a href="../refunds.html">Refunds</a>
+</nav></div></footer>
+</body></html>
